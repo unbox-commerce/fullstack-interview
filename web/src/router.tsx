@@ -1,6 +1,7 @@
 import { createRootRoute, createRoute, createRouter, Outlet } from "@tanstack/react-router";
 import { z } from "zod";
 import { CreatorsPage } from "./pages/creators";
+import { VideosPage } from "./pages/videos";
 
 export const rootRoute = createRootRoute({
   component: Outlet,
@@ -18,7 +19,13 @@ export const creatorsRoute = createRoute({
   component: CreatorsPage,
 });
 
-const routeTree = rootRoute.addChildren([creatorsRoute]);
+export const videosRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/videos",
+  component: VideosPage,
+});
+
+const routeTree = rootRoute.addChildren([creatorsRoute, videosRoute]);
 
 export const router = createRouter({ routeTree });
 
